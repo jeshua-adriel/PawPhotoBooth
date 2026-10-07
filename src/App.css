@@ -1,0 +1,83 @@
+.view{display:block;}
+
+.paw-field{position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;}
+.paw{position:absolute; font-size:28px; opacity:0.16; transform:rotate(var(--rot,0deg));}
+
+.wrap{
+  position:relative; z-index:1;
+  max-width:1180px; margin:0 auto;
+  padding: clamp(14px, 4vw, 34px) clamp(14px, 4vw, 34px) 60px;
+}
+
+header.top{
+  display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+  margin-bottom: clamp(14px, 3vw, 26px);
+}
+.brand{display:flex; align-items:center; gap:10px; cursor:pointer; user-select:none; background:none; border:none; padding:0;}
+.brand .mark{
+  width:46px; height:46px; border-radius:16px;
+  background:linear-gradient(145deg, var(--bubblegum), var(--sun));
+  display:flex; align-items:center; justify-content:center;
+  font-size:24px; box-shadow: var(--shadow);
+  animation: markWiggle 4.5s ease-in-out infinite;
+}
+@keyframes markWiggle{ 0%,88%,100%{transform:rotate(0deg)} 91%{transform:rotate(-9deg)} 94%{transform:rotate(7deg)} 97%{transform:rotate(-4deg)} }
+.brand .name{font-weight:700; font-size:clamp(20px,3.4vw,26px); letter-spacing:0.2px; text-align:left;}
+.brand .name span{color:var(--bubblegum-dark);}
+.brand .tag{font-size:12.5px; color:var(--ink-soft); margin-top:-2px;}
+
+.mode-toggle{
+  display:flex; background:var(--card); border-radius:999px; padding:4px;
+  box-shadow: var(--shadow); border:1px solid var(--line); flex-wrap:wrap;
+}
+.mode-toggle button{
+  border:none; background:transparent; font-family:'Baloo 2', sans-serif; font-weight:700; font-size:13.5px;
+  padding:9px 15px; border-radius:999px; color:var(--ink-soft); cursor:pointer;
+  transition: background .2s, color .2s; white-space:nowrap;
+}
+.mode-toggle button.active{background:var(--ink); color:#fff;}
+
+footer.foot{margin-top:34px; text-align:center; font-size:12px; color:var(--ink-soft);}
+
+/* ---------- share sheet (used from the Gallery page) ---------- */
+.sheet-backdrop{
+  position:fixed; inset:0; background:rgba(28,24,48,0.42); z-index:50;
+  display:flex; align-items:flex-end; justify-content:center;
+}
+@media (min-width:720px){ .sheet-backdrop{align-items:center;} }
+.sheet{
+  background:#fff; width:100%; max-width:420px; border-radius:24px 24px 0 0;
+  padding:20px 18px calc(18px + env(safe-area-inset-bottom, 0px));
+  box-shadow:0 -10px 40px rgba(0,0,0,0.2);
+  animation: sheetUp .28s ease-out; max-height:88vh; overflow:auto;
+}
+@media (min-width:720px){ .sheet{border-radius:24px; animation: sheetPop .22s ease-out;} }
+@keyframes sheetUp{ from{transform:translateY(30px); opacity:0;} to{transform:translateY(0); opacity:1;} }
+@keyframes sheetPop{ from{transform:scale(0.92); opacity:0;} to{transform:scale(1); opacity:1;} }
+.sheet h3{margin:0 0 4px;}
+.sheet .sub{font-size:13px; color:var(--ink-soft); margin-bottom:14px;}
+.sheet img{width:100%; border-radius:14px; margin-bottom:14px; border:1px solid var(--line);}
+.share-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:12px;}
+.share-grid button{
+  display:flex; flex-direction:column; align-items:center; gap:5px; background:none; border:none;
+  cursor:pointer; font-family:inherit; color:var(--ink);
+}
+.share-grid .ic{
+  width:52px; height:52px; border-radius:16px; display:flex; align-items:center; justify-content:center;
+  font-size:24px; color:#fff;
+}
+.share-grid span{font-size:11.5px; font-weight:600;}
+.ic.fb{background:#1877F2;} .ic.mg{background:linear-gradient(135deg,#00B2FF,#7B2FF7,#FF2D55);}
+.ic.ig{background:linear-gradient(135deg,#F58529,#DD2A7B,#8134AF,#515BD4);}
+.ic.tw{background:#111;} .ic.sc{background:#FFFC00; color:#111;} .ic.wa{background:#25D366;}
+.ic.native{background:linear-gradient(135deg,var(--bubblegum),var(--sun));}
+.ic.copy{background:var(--sky);}
+.sheet-close{width:100%; margin-top:4px;}
+
+@media print{
+  body *{visibility:hidden;}
+  .print-area, .print-area *{visibility:visible;}
+  .print-area{position:fixed; inset:0; margin:0; padding:24px; display:flex; align-items:center; justify-content:center;}
+  .print-area img{max-width:100%; max-height:100%; border-radius:14px;}
+}
+.print-area{display:none;}
